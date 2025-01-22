@@ -1,7 +1,3 @@
-//
-// Created by PC on 21.01.2025.
-//
-
 #include <fstream>
 #include <iterator>
 #include <utility>
