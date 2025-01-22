@@ -1,30 +1,19 @@
-//
-// Created by PC on 13.10.2024.
-//
 
-#ifndef LAB0_DATAHANDLING_H
-#define LAB0_DATAHANDLING_H
-#include "list"
-#include "string"
+#pragma once
+#include <list>
+#include <string>
 #include <map>
-using std::string;
-using std::pair;
-using std::list;
-
-
 
 class DataHandling {
-    list<pair<string, unsigned>> list_map_;
-    std::map<string,unsigned> mymap_;
+    std::list<std::pair<std::string, unsigned>> sorted_word_list_;
+    std::map<std::string, unsigned> word_count_map_;
     unsigned words_count_ = 0;
 
-    static bool IsDelimer(char& symbol);
+    bool Delimiter(char& symbol);
+
 public:
-    void AddMap(string& word);
+    void AddMap(std::string& line);
     unsigned GetWordsCount() const;
     void SortListMap();
-    list<pair<string, unsigned>> ReturnListMap ();
-
+    std::list<std::pair<std::string, unsigned>> ReturnListMap() const;
 };
-
-#endif //LAB0_DATAHANDLING_H
