@@ -1,68 +1,40 @@
-//
-// Created by PC on 13.10.2024.
-//
-#include "DataHandling.h"
-#include <list>
-#include <string>
-using std::string;
-using std::pair;
-using std::list;
 
-bool DataHandling::IsDelimer(char& symbol){
+#include "DataHandling.h"
+#include <cctype>
+#include <algorithm>
+
+bool DataHandling::Delimiter(char& symbol) {
     return !std::isalpha(symbol) && !std::isdigit(symbol);
 }
 
-void DataHandling::AddMap(std::string &Line) {
-    string word = "";
-    unsigned size = Line.size();
-    if (size == 0 ){ return;}
-    for (int i = 0; i <= size - 1; ++i) {
-        char symbol = Line[i];
-        if ( !IsDelimer(symbol) && i != Line.size()-1) {word += symbol;continue;}
-        if ( !IsDelimer(symbol) && i == Line.size()-1) {
+void DataHandling::AddMap(std::string& line) {
+    std::string word;
+    for (size_t i = 0; i < line.size(); ++i) {
+        char symbol = line[i];
+        if (!Delimiter(symbol)) {
             word += symbol;
-            if(word.empty()) { continue;}
-            words_count_++;
-            if (mymap_.find(word) != mymap_.end()) {
-                mymap_[word]++;
-                word.clear();
-                continue;
-            }
-            mymap_[word] = 1;
-            word.clear();
-            continue;
         }
-        if (IsDelimer(symbol) || i == Line.size()-1){
-            if(word.empty()) { continue;}
-            words_count_++;
-            if (mymap_.find(word) != mymap_.end()) {
-                mymap_[word]++;
+        if (Delimiter(symbol) || i == line.size() - 1) {
+            if (!word.empty()) {
+                ++words_count_;
+                ++word_count_map_[word];
                 word.clear();
-                continue;
             }
-            mymap_[word] = 1;
-            word.clear();
         }
     }
 }
 
-bool filter (const std::pair<std::string ,unsigned > & first_element,const std::pair<std::string ,unsigned >& second_element){
-    if( first_element.second>second_element.second){
-        return true;
-    } else{
-        return false;
-    }
-};
-
-void DataHandling::SortListMap(){
-    list_map_.assign(mymap_.cbegin(), mymap_.cend());
-    list_map_.sort(filter);
-
+void DataHandling::SortListMap() {
+    sorted_word_list_.assign(word_count_map_.cbegin(), word_count_map_.cend());
+    sorted_word_list_.sort([](const auto& first, const auto& second) {
+        return first.second > second.second;
+    });
 }
 
-list<pair<string, unsigned>>DataHandling::ReturnListMap () {
-    return list_map_;
+std::list<std::pair<std::string, unsigned>> DataHandling::ReturnListMap() const {
+    return sorted_word_list_;
 }
+
 unsigned DataHandling::GetWordsCount() const {
     return words_count_;
 }
