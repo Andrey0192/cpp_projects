@@ -1,6 +1,3 @@
-//
-// Created by PC on 21.01.2025.
-//
 
 #include <iostream>
 #include "scv_parsing.h"
