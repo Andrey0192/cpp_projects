@@ -12,11 +12,11 @@ GameWindow::GameWindow(QWidget* parent)
     setScene(&scene);
     setFixedSize(800, 600);
     scene.setSceneRect(0, 0, 800, 600);
-    setBackgroundBrush(Qt::white);  // Установка белого фона для видимости
+    setBackgroundBrush(Qt::white);  
 
-    // Загрузка уровня
+   
     LevelLoader loader(&scene, &factory);
-    if (!loader.loadFromFile("level.txt")) {  // Убедитесь, что файл находится в рабочей директории
+    if (!loader.loadFromFile("level.txt")) {  
         qWarning() << "4Не удалось загрузить уровень!";
     }
 
@@ -93,7 +93,7 @@ void GameWindow::gameLoop() {
         for (QGraphicsItem* item : collisions) {
             if (auto* enemy = dynamic_cast<Enemy*>(item)) {
                 qDebug() << "1Столкновение с врагом!";
-                // Здесь можно добавить логику уменьшения здоровья или завершения игры
+                // Здесь можно  сделать уменьшение здоровья или завершение игры
             }
             if (auto* itemObj = dynamic_cast<Item*>(item)) {
                 scene.removeItem(itemObj);
