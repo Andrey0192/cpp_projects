@@ -2,7 +2,6 @@
 #include <QPainter>
 
 Item::Item() {
-    // Инициализация предмета
 }
 
 QRectF Item::boundingRect() const {
@@ -15,5 +14,5 @@ void Item::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidget*) {
 }
 
 void Item::updateObject() {
-    // Логика обновления предмета, если требуется
+    // Логика обновления предмета 
 }
