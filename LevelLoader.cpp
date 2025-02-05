@@ -44,7 +44,7 @@ bool LevelLoader::loadFromFile(const QString& filename) {
                     scene->addItem(item);
                 }
             }
-            // Обработка других символов по необходимости
+            // можно добавить обработку других символов 
         }
         ++y;
     }
