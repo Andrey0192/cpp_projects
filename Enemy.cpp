@@ -17,10 +17,10 @@ void Enemy::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidget*) 
 }
 
 void Enemy::updateObject() {
-    // Простая логика врага: движение туда-сюда
+    // движение туда сюда
     setPos(x() + velocity.x(), y());
 
-    // Проверка границ сцены для изменения направления
+    //  Проверка границ сцены
     if (x() > 700) {
         velocity.setX(-speed);
     }
@@ -28,7 +28,7 @@ void Enemy::updateObject() {
         velocity.setX(speed);
     }
 
-    // Проверка столкновений с платформами для предотвращения прохода сквозь них
+    // Проверка столкновений с платформами 
     QList<QGraphicsItem*> collisions = collidingItems();
     for (QGraphicsItem* item : collisions) {
         if (auto* platform = dynamic_cast<PlatformTile*>(item)) {
