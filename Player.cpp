@@ -76,5 +76,5 @@ void Player::jump() {
 }
 
 void Player::updateObject() {
-    // Дополнительные обновления, если нужно
+    // доп действия
 }
